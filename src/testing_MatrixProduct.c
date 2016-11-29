@@ -5,6 +5,7 @@
 //#define VERVOSE
 #define COUNT_TIME
 //#define PRINT_MATRICES
+#define SHOW_1_1
 
 //Functions and Defines used in the code measured
 #define Nmax 600
@@ -89,7 +90,11 @@ int main(){
 #ifdef VERVOSE
         printf("Time used by the measured code (product of matrices): [%.20lf]\n",realTime-time4func);
 #else
+        #ifdef SHOW_1_1
+        printf("%.20lf\t% 10.6f",realTime-time4func,C[Nmax-1][Nmax-1]);
+        #else
         printf("%.20lf",realTime-time4func);
+        #endif
 #endif
 
 #endif

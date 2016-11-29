@@ -1,2 +1,0 @@
-Time used with the -O1 option:
-0.44772099999999998010

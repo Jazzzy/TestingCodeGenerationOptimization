@@ -2,13 +2,12 @@
 #include <stdio.h>
 
 
-#define MAX_ITE 100000
-#define VERVOSE
+//#define VERVOSE
 #define COUNT_TIME
-#define PRINT_MATRICES
+//#define PRINT_MATRICES
 
 //Functions and Defines used in the code measured
-#define Nmax 10
+#define Nmax 600
 void producto(float x, float y, float *z){
         *z=x*y;
 }
@@ -71,13 +70,13 @@ int main(){
                                 t+=r;
                         }
                         C[i][j]=t;
-                        #ifdef PRINT_MATRICES
-                        printf("[% 10.6f]",C[i][j]);
-                        #endif
-                }
                 #ifdef PRINT_MATRICES
-                printf("\n");
+                        printf("[% 10.6f]",C[i][j]);
                 #endif
+                }
+        #ifdef PRINT_MATRICES
+                printf("\n");
+        #endif
         }
 
 //---------------------End of code to test---------------------

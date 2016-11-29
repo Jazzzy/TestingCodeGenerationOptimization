@@ -1,0 +1,1 @@
+Time used with the -O2 option:

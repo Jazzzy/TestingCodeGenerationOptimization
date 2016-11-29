@@ -1,0 +1,2 @@
+Time used with the -Os option:
+0.00000000000000000000

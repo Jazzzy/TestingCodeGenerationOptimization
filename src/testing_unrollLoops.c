@@ -30,14 +30,19 @@ int main() {
         #pragma clang loop unroll(enable)
         #elif UNROLL_LOOPS_COUNT
         #pragma clang loop unroll_count(COUNT)
+        #else
+        #pragma clang loop unroll(disable)
         #endif
         for(i=0; i<N; i++) {
                 res[i]=0.0005*i;
         }
+
         #ifdef UNROLL_LOOPS_STD
         #pragma clang loop unroll(enable)
         #elif UNROLL_LOOPS_COUNT
         #pragma clang loop unroll_count(COUNT)
+        #else
+        #pragma clang loop unroll(disable)
         #endif
         for(i=0; i<N; i++) {
                 x=res[i];

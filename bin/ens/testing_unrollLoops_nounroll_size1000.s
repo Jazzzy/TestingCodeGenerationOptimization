@@ -1,76 +1,111 @@
-	.section	__TEXT,__text,regular,pure_instructions
-	.macosx_version_min 10, 12
-	.section	__TEXT,__literal8,8byte_literals
-	.align	3
-LCPI0_0:
-	.quad	4557750909289998844     ## double 5.0000000000000001E-4
-LCPI0_1:
-	.quad	-4571364728013586432    ## double -1000
-LCPI0_2:
-	.quad	4711630319722168320     ## double 1.0E+7
-	.section	__TEXT,__text,regular,pure_instructions
-	.globl	_main
-	.align	4, 0x90
-_main:                                  ## @main
-	.cfi_startproc
-## BB#0:
-	xorl	%eax, %eax
-	movsd	LCPI0_0(%rip), %xmm0    ## xmm0 = mem[0],zero
-	movq	_res@GOTPCREL(%rip), %rcx
-	xorl	%edx, %edx
-	.align	4, 0x90
-LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
-	xorps	%xmm1, %xmm1
-	cvtsi2sdl	%edx, %xmm1
-	mulsd	%xmm0, %xmm1
-	movsd	%xmm1, (%rcx,%rdx,8)
-	incq	%rdx
-	cmpq	$1000, %rdx             ## imm = 0x3E8
-	jne	LBB0_1
-## BB#2:
-	movsd	LCPI0_1(%rip), %xmm1    ## xmm1 = mem[0],zero
-	movsd	LCPI0_2(%rip), %xmm2    ## xmm2 = mem[0],zero
-	.align	4, 0x90
-LBB0_3:                                 ## =>This Inner Loop Header: Depth=1
-	movsd	(%rcx,%rax,8), %xmm3    ## xmm3 = mem[0],zero
-	movapd	%xmm3, %xmm4
-	mulsd	%xmm4, %xmm4
-	addsd	%xmm0, %xmm4
-	movapd	%xmm3, %xmm5
-	addsd	%xmm1, %xmm5
-	movapd	%xmm3, %xmm6
-	cmpltsd	%xmm2, %xmm6
-	movapd	%xmm6, %xmm7
-	andnpd	%xmm5, %xmm7
-	andpd	%xmm4, %xmm6
-	orpd	%xmm7, %xmm6
-	addsd	%xmm3, %xmm6
-	movsd	%xmm6, (%rcx,%rax,8)
-	incq	%rax
-	cmpq	$1000, %rax             ## imm = 0x3E8
-	jne	LBB0_3
-## BB#4:
-	pushq	%rbp
-Ltmp0:
-	.cfi_def_cfa_offset 16
-Ltmp1:
-	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
-Ltmp2:
-	.cfi_def_cfa_register %rbp
-	movsd	7992(%rcx), %xmm0       ## xmm0 = mem[0],zero
-	leaq	L_.str(%rip), %rdi
-	movb	$1, %al
-	callq	_printf
+	.cstring
+LC3:
+	.ascii "Resultado: %ef\0"
+	.section __TEXT,__text_startup,regular,pure_instructions
+	.globl _main
+_main:
+LFB1:
+	subq	$8, %rsp
+LCFI0:
+	movl	$0, %eax
+	movq	_res@GOTPCREL(%rip), %rdx
+	movsd	LC0(%rip), %xmm1
+L2:
+	pxor	%xmm0, %xmm0
+	cvtsi2sd	%eax, %xmm0
+	mulsd	%xmm1, %xmm0
+	movsd	%xmm0, (%rdx,%rax,8)
+	addq	$1, %rax
+	cmpq	$1000, %rax
+	jne	L2
+	movq	_res@GOTPCREL(%rip), %rax
+	leaq	8000(%rax), %rcx
+	movsd	LC1(%rip), %xmm3
+	movsd	LC2(%rip), %xmm5
+	movsd	LC0(%rip), %xmm4
+	jmp	L6
+L10:
+	movapd	%xmm2, %xmm0
+	subsd	%xmm5, %xmm0
+L5:
+	addsd	%xmm2, %xmm0
+	movsd	%xmm0, (%rdx)
+	addq	$8, %rax
+	cmpq	%rcx, %rax
+	je	L12
+L6:
+	movq	%rax, %rdx
+	movsd	(%rax), %xmm2
+	ucomisd	%xmm2, %xmm3
+	jbe	L10
+	movapd	%xmm2, %xmm0
+	mulsd	%xmm2, %xmm0
+	addsd	%xmm4, %xmm0
+	jmp	L5
+L12:
+	movq	_res@GOTPCREL(%rip), %rax
+	movsd	7992(%rax), %xmm0
+	leaq	LC3(%rip), %rdi
 	movl	$1, %eax
-	popq	%rbp
-	retq
-	.cfi_endproc
-
-	.comm	_res,8000,4             ## @res
-	.section	__TEXT,__cstring,cstring_literals
-L_.str:                                 ## @.str
-	.asciz	"Resultado: %ef"
-
-
-.subsections_via_symbols
+	call	_printf
+	movl	$1, %eax
+	addq	$8, %rsp
+LCFI1:
+	ret
+LFE1:
+	.comm	_res,8000,5
+	.literal8
+	.align 3
+LC0:
+	.long	3539053052
+	.long	1061184077
+	.align 3
+LC1:
+	.long	0
+	.long	1097011920
+	.align 3
+LC2:
+	.long	0
+	.long	1083129856
+	.section __TEXT,__eh_frame,coalesced,no_toc+strip_static_syms+live_support
+EH_frame1:
+	.set L$set$0,LECIE1-LSCIE1
+	.long L$set$0
+LSCIE1:
+	.long	0
+	.byte	0x1
+	.ascii "zR\0"
+	.byte	0x1
+	.byte	0x78
+	.byte	0x10
+	.byte	0x1
+	.byte	0x10
+	.byte	0xc
+	.byte	0x7
+	.byte	0x8
+	.byte	0x90
+	.byte	0x1
+	.align 3
+LECIE1:
+LSFDE1:
+	.set L$set$1,LEFDE1-LASFDE1
+	.long L$set$1
+LASFDE1:
+	.long	LASFDE1-EH_frame1
+	.quad	LFB1-.
+	.set L$set$2,LFE1-LFB1
+	.quad L$set$2
+	.byte	0
+	.byte	0x4
+	.set L$set$3,LCFI0-LFB1
+	.long L$set$3
+	.byte	0xe
+	.byte	0x10
+	.byte	0x4
+	.set L$set$4,LCFI1-LCFI0
+	.long L$set$4
+	.byte	0xe
+	.byte	0x8
+	.align 3
+LEFDE1:
+	.subsections_via_symbols

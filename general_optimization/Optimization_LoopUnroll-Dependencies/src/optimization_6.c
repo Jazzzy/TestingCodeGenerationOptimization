@@ -3,10 +3,9 @@
 #include <stdlib.h>
 
 
-
-//#define ITER 3000000
-#define ITER 1000000
-#define N 1000
+// This are commented because we introduce the values when compiling
+// #define ITER 1000000
+// #define N 1000
 #define INIT_ITER 3
 
 int main(){

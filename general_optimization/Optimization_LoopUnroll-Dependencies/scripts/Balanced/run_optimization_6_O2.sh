@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd ../bin/out/
+cd ../../bin/outBalanced
 
-echo "Testing with the -O0 option"
-cd ./O0
+echo "Testing with the -O2 option"
+cd ./O2
 echo "Testing time with no optimizations"
 echo "Testing time with no optimizations" > ./logs/outOf_NO_OPTIONS.txt
 ./optimization_6_size_1000.out > /dev/null

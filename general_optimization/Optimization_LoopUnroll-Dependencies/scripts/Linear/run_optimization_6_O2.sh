@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../bin/out/
+cd ../../bin/out/
 
 echo "Testing with the -O2 option"
 cd ./O2

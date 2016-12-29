@@ -7,7 +7,7 @@ cd ../../src
 # With the -O0 level of optimization
 echo "Compiling with -O0"
 # Not optimized versions
-gcc-6 -O0 optimization_6.c -DN=20 -DITER=10000000 -DCOUNT_TIME  -o ../bin/outBalancedBalanced/O0/optimization_6_size_20.out
+gcc-6 -O0 optimization_6.c -DN=20 -DITER=10000000 -DCOUNT_TIME  -o ../bin/outBalanced/O0/optimization_6_size_20.out
 gcc-6 -O0 optimization_6.c -DN=200 -DITER=1000000 -DCOUNT_TIME  -o ../bin/outBalanced/O0/optimization_6_size_200.out
 gcc-6 -O0 optimization_6.c -DN=1000 -DITER=1000000 -DCOUNT_TIME  -o ../bin/outBalanced/O0/optimization_6_size_1000.out
 gcc-6 -O0 optimization_6.c -DN=10000 -DITER=100000 -DCOUNT_TIME  -o ../bin/outBalanced/O0/optimization_6_size_10000.out
